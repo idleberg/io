@@ -31,7 +31,6 @@ struct ContentView: View {
 				.font(.subheadline)
 				.foregroundColor(.secondary))
 				.contentTransition(.opacity)
-				.animation(.easeInOut(duration: 0.2), value: displayName.current)
 			Spacer()
 		}
 		.padding(.horizontal, 16)
