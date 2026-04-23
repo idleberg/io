@@ -144,7 +144,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		menu.addItem(NSMenuItem.separator())
 
 		let aboutItem = NSMenuItem(
-			title: "About \(Self.appName)",
+			title: "About",
 			action: #selector(showAbout),
 			keyEquivalent: ""
 		)
