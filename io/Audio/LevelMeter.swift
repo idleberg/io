@@ -47,44 +47,7 @@ final class LevelMeter: ObservableObject {
 		let channelCount = Int(buffer.format.channelCount)
 		let frameCount = Int(buffer.frameLength)
 		guard channelCount > 0, frameCount > 0 else { return }
-
-		var newLevels = [Float](repeating: Self.minDB, count: channelCount)
-
-		if let floatData = buffer.floatChannelData {
-			for channel in 0..<channelCount {
-				let samples = UnsafeBufferPointer(start: floatData[channel], count: frameCount)
-				var sum: Float = 0
-				for sample in samples { sum += sample * sample }
-				let rms = sqrt(sum / Float(frameCount))
-				newLevels[channel] = 20 * log10(max(rms, 1e-7))
-			}
-		} else if let int16Data = buffer.int16ChannelData {
-			let scale = Float(Int16.max)
-			for channel in 0..<channelCount {
-				let samples = UnsafeBufferPointer(start: int16Data[channel], count: frameCount)
-				var sum: Float = 0
-				for sample in samples {
-					let normalized = Float(sample) / scale
-					sum += normalized * normalized
-				}
-				let rms = sqrt(sum / Float(frameCount))
-				newLevels[channel] = 20 * log10(max(rms, 1e-7))
-			}
-		} else if let int32Data = buffer.int32ChannelData {
-			let scale = Float(Int32.max)
-			for channel in 0..<channelCount {
-				let samples = UnsafeBufferPointer(start: int32Data[channel], count: frameCount)
-				var sum: Float = 0
-				for sample in samples {
-					let normalized = Float(sample) / scale
-					sum += normalized * normalized
-				}
-				let rms = sqrt(sum / Float(frameCount))
-				newLevels[channel] = 20 * log10(max(rms, 1e-7))
-			}
-		} else {
-			return
-		}
+		guard let newLevels = Self.levels(from: buffer, channels: channelCount, frames: frameCount) else { return }
 
 		lock.lock()
 		rawLevels = newLevels
@@ -100,6 +63,46 @@ final class LevelMeter: ObservableObject {
 				self.peakLevels = Array(repeating: Self.minDB, count: channelCount)
 			}
 		}
+	}
+
+	private static func levels(from buffer: AVAudioPCMBuffer, channels: Int, frames: Int) -> [Float]? {
+		if let floatData = buffer.floatChannelData {
+			return (0..<channels).map { channel in
+				let samples = UnsafeBufferPointer(start: floatData[channel], count: frames)
+				var sum: Float = 0
+				for sample in samples { sum += sample * sample }
+				return dbFromSumOfSquares(sum, frames: frames)
+			}
+		}
+		if let int16Data = buffer.int16ChannelData {
+			return integerLevels(data: int16Data, channels: channels, frames: frames, scale: Float(Int16.max))
+		}
+		if let int32Data = buffer.int32ChannelData {
+			return integerLevels(data: int32Data, channels: channels, frames: frames, scale: Float(Int32.max))
+		}
+		return nil
+	}
+
+	private static func integerLevels<T: BinaryInteger>(
+		data: UnsafePointer<UnsafeMutablePointer<T>>,
+		channels: Int,
+		frames: Int,
+		scale: Float
+	) -> [Float] {
+		(0..<channels).map { channel in
+			let samples = UnsafeBufferPointer(start: data[channel], count: frames)
+			var sum: Float = 0
+			for sample in samples {
+				let normalized = Float(sample) / scale
+				sum += normalized * normalized
+			}
+			return dbFromSumOfSquares(sum, frames: frames)
+		}
+	}
+
+	private static func dbFromSumOfSquares(_ sum: Float, frames: Int) -> Float {
+		let rms = sqrt(sum / Float(frames))
+		return 20 * log10(max(rms, 1e-7))
 	}
 
 	private func tick() {

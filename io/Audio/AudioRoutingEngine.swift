@@ -197,21 +197,26 @@ final class AudioRoutingEngine: ObservableObject {
 			}
 		}
 
-		// Tap the input; forward buffers to the player and metering. Copy each
-		// buffer before scheduling — AVAudioEngine reuses the tap's buffer
-		// memory, so scheduling the original causes it to be overwritten
-		// before it's played back.
-		let tapFormat = inputFormat
+		try installInputTap(format: inputFormat)
+
+		playbackEngine.prepare()
+		captureEngine.prepare()
+	}
+
+	// Tap the input; forward buffers to the player and metering. Copy each
+	// buffer before scheduling — AVAudioEngine reuses the tap's buffer memory,
+	// so scheduling the original causes it to be overwritten before playback.
+	private func installInputTap(format: AVAudioFormat) throws {
 		try Self.guardException {
 			self.captureEngine.inputNode.removeTap(onBus: 0)
 			self.captureEngine.inputNode.installTap(
 				onBus: 0,
 				bufferSize: 512,
-				format: tapFormat
+				format: format
 			) { [weak self] buffer, _ in
 				guard let self else { return }
 				self.levelMeter.process(buffer)
-				guard buffer.format.isEqual(tapFormat),
+				guard buffer.format.isEqual(format),
 					let copy = Self.copyBuffer(buffer)
 				else { return }
 				// Scheduling on a player whose output format no longer matches
@@ -221,9 +226,6 @@ final class AudioRoutingEngine: ObservableObject {
 				}
 			}
 		}
-
-		playbackEngine.prepare()
-		captureEngine.prepare()
 	}
 
 	private func teardownGraph() {
