@@ -33,9 +33,6 @@ jobs:
             STRIP_INSTALLED_PRODUCT=YES \
             STRIP_SWIFT_SYMBOLS=YES \
             DEAD_CODE_STRIPPING=YES \
-            CODE_SIGN_IDENTITY=- \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO \
             build
 
       - name: Package app
