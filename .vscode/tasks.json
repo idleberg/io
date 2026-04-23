@@ -1,0 +1,115 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Debug",
+			"type": "shell",
+			"command": "xcodebuild",
+			"args": [
+				"-scheme", "Cleansi",
+				"-configuration", "Debug",
+				"-derivedDataPath", "${workspaceFolder}/build",
+				"build"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared",
+				"clear": true
+			},
+			"problemMatcher": {
+				"owner": "xcodebuild",
+				"fileLocation": "absolute",
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		},
+		{
+			"label": "Build Release",
+			"type": "shell",
+			"command": "xcodebuild",
+			"args": [
+				"-scheme", "Cleansi",
+				"-configuration", "Release",
+				"-derivedDataPath", "${workspaceFolder}/build",
+				"build"
+			],
+			"group": "build",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared",
+				"clear": true
+			},
+			"problemMatcher": {
+				"owner": "xcodebuild",
+				"fileLocation": "absolute",
+				"pattern": {
+					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		},
+		{
+			"label": "Clean",
+			"type": "shell",
+			"command": "xcodebuild",
+			"args": [
+				"-scheme", "Cleansi",
+				"-derivedDataPath", "${workspaceFolder}/build",
+				"clean"
+			],
+			"group": "build",
+			"presentation": {
+				"reveal": "silent",
+				"panel": "shared"
+			}
+		},
+		{
+			"label": "Lint",
+			"type": "shell",
+			"command": "swiftlint",
+			"args": ["lint", "--strict"],
+			"group": "test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "shared"
+			},
+			"problemMatcher": {
+				"owner": "swiftlint",
+				"fileLocation": "absolute",
+				"pattern": {
+					"regexp": "^(.+):(\\d+):(\\d+):\\s+(warning|error):\\s+(.+)$",
+					"file": 1,
+					"line": 2,
+					"column": 3,
+					"severity": 4,
+					"message": 5
+				}
+			}
+		},
+		{
+			"label": "Run App",
+			"type": "shell",
+			"command": "open",
+			"args": ["${workspaceFolder}/build/Build/Products/Debug/Cleansi.app"],
+			"dependsOn": "Build Debug",
+			"group": "build",
+			"presentation": {
+				"reveal": "silent"
+			}
+		}
+	]
+}

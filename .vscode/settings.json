@@ -1,0 +1,36 @@
+{
+	// Editor settings for Swift
+	"editor.tabSize": 2,
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": true,
+	"editor.rulers": [120],
+
+	// File associations
+	"files.associations": {
+		"*.swift": "swift"
+	},
+
+	// Exclude build artifacts from search
+	"files.exclude": {
+		"**/.DS_Store": true,
+		"**/build": true,
+		"**/*.xcodeproj/xcuserdata": true,
+		"**/*.xcodeproj/project.xcworkspace": true
+	},
+	"search.exclude": {
+		"**/build": true,
+		"**/*.xcodeproj": true
+	},
+
+	// Swift extension settings (swiftlang.swift-vscode)
+	"swift.swiftEnvironmentVariables": {},
+	"swift.outputChannelLogLevel": "debug",
+
+	// Swift language settings
+	"[swift]": {
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.organizeImports": "explicit"
+		}
+	}
+}
