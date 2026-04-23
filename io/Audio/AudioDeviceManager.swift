@@ -128,7 +128,7 @@ final class AudioDeviceManager: ObservableObject {
 	private static let listenerSelectors: [AudioObjectPropertySelector] = [
 		kAudioHardwarePropertyDevices,
 		kAudioHardwarePropertyDefaultInputDevice,
-		kAudioHardwarePropertyDefaultOutputDevice,
+		kAudioHardwarePropertyDefaultOutputDevice
 	]
 
 	private func installListeners() {

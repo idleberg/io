@@ -76,8 +76,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		// If the currently routed device vanished and no default is available,
 		// stop cleanly rather than letting the engine fail opaquely.
 		if (inputVanished && routingEngine.selectedInputID == 0)
-			|| (outputVanished && routingEngine.selectedOutputID == 0)
-		{
+			|| (outputVanished && routingEngine.selectedOutputID == 0) {
 			routingEngine.stopRouting()
 		}
 	}
