@@ -2,7 +2,7 @@
 
 # Paths to include
 included:
-  - Cleansi
+  - io
 
 # Paths to exclude
 excluded:

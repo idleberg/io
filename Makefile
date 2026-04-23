@@ -4,13 +4,12 @@ install:
 	sudo xcodebuild -license accept
 
 build:
-	xcodebuild -scheme Cleansi \
+	xcodebuild -scheme io \
 		-configuration Release \
 		-derivedDataPath build
 
 fix-lint:
 	swiftlint lint \
-		--strict \
 		--fix
 
 lint:
