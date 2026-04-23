@@ -21,7 +21,7 @@ final class DisplayName: ObservableObject {
 		"Internal Order",
 		"Internal Organ",
 		"International Organization",
-		"Inventory Objective"
+		"Inventory Objective",
 	]
 
 	@Published private(set) var current: String = "io"

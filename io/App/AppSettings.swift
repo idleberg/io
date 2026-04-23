@@ -11,7 +11,7 @@ final class AppSettings: ObservableObject {
 		static let launchAtLogin = "launchAtLogin"
 
 		static let all: [String] = [
-			selectedInputDeviceID, selectedOutputDeviceID, gainDB, launchAtLogin
+			selectedInputDeviceID, selectedOutputDeviceID, gainDB, launchAtLogin,
 		]
 	}
 
