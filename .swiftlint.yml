@@ -1,13 +1,17 @@
-# SwiftLint configuration for io
+# SwiftLint configuration for Cleansi
 
+# Paths to include
 included:
-  - io
+  - Cleansi
 
+# Paths to exclude
 excluded:
   - build
   - .build
-  - DerivedData
+  - Pods
+  - Carthage
 
+# Enabled rules
 opt_in_rules:
   - closure_spacing
   - empty_count
@@ -23,10 +27,11 @@ opt_in_rules:
   - unneeded_parentheses_in_closure_argument
   - vertical_whitespace_closing_braces
 
+# Disabled rules
 disabled_rules:
-  - line_length
-  - trailing_whitespace
-  - todo
+  - line_length  # We use 120 char ruler but don't enforce
+  - trailing_whitespace  # Can be noisy
+  - todo  # Allow TODO comments
 
 identifier_name:
   min_length:
@@ -51,8 +56,8 @@ type_name:
     error: 60
 
 function_body_length:
-  warning: 80
-  error: 120
+  warning: 50
+  error: 100
 
 file_length:
   warning: 400
@@ -72,4 +77,5 @@ nesting:
   function_level:
     warning: 3
 
+# Reporter type (xcode, json, csv, checkstyle, codeclimate, junit, html, emoji, sonarqube, markdown, github-actions-logging)
 reporter: "xcode"
