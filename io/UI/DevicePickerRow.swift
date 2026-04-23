@@ -23,6 +23,7 @@ struct DevicePickerRow: View {
 			}
 			.labelsHidden()
 			.pickerStyle(.menu)
+			.frame(maxWidth: .infinity)
 			.accessibilityLabel("\(label) device")
 		}
 	}

@@ -22,6 +22,7 @@
 		B100000D000000000000A001 /* DevicePickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100010D000000000000A001 /* DevicePickerRow.swift */; };
 		B100000E000000000000A001 /* GainSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100010E000000000000A001 /* GainSlider.swift */; };
 		B100000F000000000000A001 /* LevelMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B100010F000000000000A001 /* LevelMeterView.swift */; };
+		B1000012000000000000A001 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000116000000000000A001 /* AboutView.swift */; };
 		B1000010000000000000A001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1000110000000000000A001 /* Assets.xcassets */; };
 		B1000011000000000000A001 /* ExceptionCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B1000114000000000000A001 /* ExceptionCatcher.m */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		B1000113000000000000A001 /* ExceptionCatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExceptionCatcher.h; sourceTree = "<group>"; };
 		B1000114000000000000A001 /* ExceptionCatcher.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExceptionCatcher.m; sourceTree = "<group>"; };
 		B1000115000000000000A001 /* io-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "io-Bridging-Header.h"; sourceTree = "<group>"; };
+		B1000116000000000000A001 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		B1000200000000000000A001 /* io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -134,6 +136,7 @@
 				B100010D000000000000A001 /* DevicePickerRow.swift */,
 				B100010E000000000000A001 /* GainSlider.swift */,
 				B100010F000000000000A001 /* LevelMeterView.swift */,
+				B1000116000000000000A001 /* AboutView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				B100000D000000000000A001 /* DevicePickerRow.swift in Sources */,
 				B100000E000000000000A001 /* GainSlider.swift in Sources */,
 				B100000F000000000000A001 /* LevelMeterView.swift in Sources */,
+				B1000012000000000000A001 /* AboutView.swift in Sources */,
 				B1000011000000000000A001 /* ExceptionCatcher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

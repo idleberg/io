@@ -3,7 +3,7 @@ import Combine
 import CoreAudio
 import SwiftUI
 
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 	static let appName = "io"
 
 	private let permissions = PermissionsManager()
@@ -15,6 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	private var statusItem: NSStatusItem!
 	private var popover: NSPopover!
 	private var eventMonitor: Any?
+	private var aboutWindow: NSWindow?
 	private var cancellables = Set<AnyCancellable>()
 
 	func applicationDidFinishLaunching(_ notification: Notification) {
@@ -249,8 +250,42 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@objc private func showAbout() {
-		NSApp.orderFrontStandardAboutPanel(nil)
+		if aboutWindow == nil {
+			aboutWindow = makeWindow(title: "About", content: AboutView())
+			aboutWindow?.initialFirstResponder = nil
+		}
+		showWindow(aboutWindow!)
+		aboutWindow?.makeFirstResponder(nil)
+	}
+
+	private func makeWindow<Content: View>(title: String, content: Content) -> NSWindow {
+		let hostingView = NSHostingView(rootView: content)
+		hostingView.setFrameSize(hostingView.fittingSize)
+
+		let window = NSWindow(
+			contentRect: NSRect(origin: .zero, size: hostingView.fittingSize),
+			styleMask: [.titled, .closable],
+			backing: .buffered,
+			defer: false
+		)
+		window.title = title
+		window.contentView = hostingView
+		window.center()
+		window.isReleasedWhenClosed = false
+		window.delegate = self
+		return window
+	}
+
+	private func showWindow(_ window: NSWindow) {
+		NSApp.setActivationPolicy(.regular)
+		window.makeKeyAndOrderFront(nil)
 		NSApp.activate(ignoringOtherApps: true)
+	}
+
+	func windowWillClose(_ notification: Notification) {
+		if let window = notification.object as? NSWindow, window == aboutWindow {
+			NSApp.setActivationPolicy(.accessory)
+		}
 	}
 
 	@objc private func quit() {
