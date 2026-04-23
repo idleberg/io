@@ -171,7 +171,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	private func setupPopover() {
 		popover = NSPopover()
 		popover.behavior = .transient
-		popover.animates = true
+		popover.animates = false
 		popover.contentViewController = NSHostingController(rootView: rootView())
 	}
 
