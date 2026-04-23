@@ -49,11 +49,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 		let storedInput = AudioDeviceID(settings.selectedInputDeviceID)
 		let storedOutput = AudioDeviceID(settings.selectedOutputDeviceID)
 
-		routingEngine.selectedInputID = deviceManager.isInputValid(storedInput)
+		routingEngine.selectedInputID =
+			deviceManager.isInputValid(storedInput)
 			? storedInput
 			: deviceManager.defaultInputID
 
-		routingEngine.selectedOutputID = deviceManager.isOutputValid(storedOutput)
+		routingEngine.selectedOutputID =
+			deviceManager.isOutputValid(storedOutput)
 			? storedOutput
 			: deviceManager.defaultOutputID
 
@@ -231,7 +233,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 	@objc private func resetSettings() {
 		let alert = NSAlert()
 		alert.messageText = "Reset all \(Self.appName) settings to their defaults?"
-		alert.informativeText = "The selected input and output devices, gain, and Launch-at-Login preference will be cleared."
+		alert.informativeText =
+			"The selected input and output devices, gain, and Launch-at-Login preference will be cleared."
 		alert.alertStyle = .warning
 		alert.addButton(withTitle: "Reset")
 		alert.addButton(withTitle: "Cancel")

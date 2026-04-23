@@ -49,7 +49,7 @@ enum CoreAudioHelpers {
 	) throws -> String {
 		var addr = address
 		var size = UInt32(MemoryLayout<CFString?>.size)
-		var cfString: CFString? = nil
+		var cfString: CFString?
 		let status = withUnsafeMutablePointer(to: &cfString) { ptr in
 			AudioObjectGetPropertyData(object, &addr, 0, nil, &size, ptr)
 		}

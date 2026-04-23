@@ -255,10 +255,12 @@ final class AudioRoutingEngine: ObservableObject {
 	}
 
 	private static func copyBuffer(_ buffer: AVAudioPCMBuffer) -> AVAudioPCMBuffer? {
-		guard let copy = AVAudioPCMBuffer(
-			pcmFormat: buffer.format,
-			frameCapacity: buffer.frameCapacity
-		) else {
+		guard
+			let copy = AVAudioPCMBuffer(
+				pcmFormat: buffer.format,
+				frameCapacity: buffer.frameCapacity
+			)
+		else {
 			return nil
 		}
 		copy.frameLength = buffer.frameLength

@@ -49,10 +49,12 @@ final class AudioDeviceManager: ObservableObject {
 		let ids = (try? Self.allDeviceIDs()) ?? []
 		let devices = ids.compactMap { Self.makeDevice(id: $0, canClassifyInputs: canClassifyInputs) }
 
-		let inputs = devices
+		let inputs =
+			devices
 			.filter(\.hasInput)
 			.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
-		let outputs = devices
+		let outputs =
+			devices
 			.filter(\.hasOutput)
 			.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
 

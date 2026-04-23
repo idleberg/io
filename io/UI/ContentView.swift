@@ -26,14 +26,12 @@ struct ContentView: View {
 
 	private var header: some View {
 		HStack(spacing: 8) {
-			(
-				Text("io").font(.headline)
-					+ Text(" – \(displayName.current)")
-						.font(.subheadline)
-						.foregroundColor(.secondary)
-			)
-			.contentTransition(.opacity)
-			.animation(.easeInOut(duration: 0.2), value: displayName.current)
+			(Text("io").font(.headline)
+				+ Text(" – \(displayName.current)")
+				.font(.subheadline)
+				.foregroundColor(.secondary))
+				.contentTransition(.opacity)
+				.animation(.easeInOut(duration: 0.2), value: displayName.current)
 			Spacer()
 		}
 		.padding(.horizontal, 16)
@@ -64,10 +62,11 @@ struct ContentView: View {
 				)
 			)
 
-			GainSlider(gainDB: Binding(
-				get: { routingEngine.gainDB },
-				set: { routingEngine.gainDB = $0 }
-			))
+			GainSlider(
+				gainDB: Binding(
+					get: { routingEngine.gainDB },
+					set: { routingEngine.gainDB = $0 }
+				))
 
 			LevelMeterView(
 				meter: routingEngine.levelMeter,
