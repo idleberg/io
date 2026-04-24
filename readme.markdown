@@ -7,8 +7,6 @@ A macOS menu bar utility that routes audio from a selected input device to a sel
 - Select any audio input and output device
 - Listen toggle to start or stop routing
 - Input gain control from −40 dB to +20 dB
-- Stereo level meters with peak hold, flanking the Listen button
-- Launch at Login
 - Responds to device plug/unplug and sleep/wake events
 
 ## Requirements
