@@ -16,6 +16,12 @@ A macOS menu bar utility that routes audio from a selected input device to a sel
 - macOS 13 (Ventura) or later
 - Xcode 15 or later (for building)
 
+## Installation
+
+```sh
+brew install idleberg/asahi/io
+```
+
 ## Build
 
 ```sh
