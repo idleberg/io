@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "lefthook-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/csjones/lefthook-plugin.git",
+      "state" : {
+        "revision" : "d2aa660403eb28f124c5a1b07e04ffe43d2e7940",
+        "version" : "2.1.6"
+      }
+    }
+  ],
+  "version" : 2
+}

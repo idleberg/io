@@ -1,0 +1,9 @@
+[pre-commit.commands.swiftformat]
+glob = "*.{swift}"
+run = "swift format -i {staged_files}"
+stage_fixed = true
+
+[pre-commit.commands.lint]
+glob = "*.swift"
+run = "swiftlint --fix --strict --no-cache {staged_files}"
+stage_fixed = true

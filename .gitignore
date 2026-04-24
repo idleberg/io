@@ -2,6 +2,7 @@
 .claude/
 
 # Build Artifacts
+.build/
 build/
 DerivedData/
 
