@@ -26,16 +26,7 @@ Or with Xcode:
 
 ```sh
 xcodebuild -scheme io -configuration Release
-```
-
-## Development
-
-```sh
-make lint          # SwiftLint
-make format        # swift-format in place
-make format-check  # verify formatting without writing
-```
 
 ## License
 
-MIT
+[The MIT License](LICENSE) - Feel free to use, modify, and distribute this code.
