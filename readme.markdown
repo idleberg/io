@@ -28,12 +28,6 @@ brew install idleberg/asahi/io
 make build
 ```
 
-Or with Xcode:
-
-```sh
-xcodebuild -scheme io -configuration Release
-```
-
 ## License
 
 [The MIT License](LICENSE) - Feel free to use, modify, and distribute this code.
