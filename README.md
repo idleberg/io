@@ -26,6 +26,7 @@ Or with Xcode:
 
 ```sh
 xcodebuild -scheme io -configuration Release
+```
 
 ## License
 
