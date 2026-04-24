@@ -1,4 +1,4 @@
-[pre-commit.commands.swiftformat]
+[pre-commit.commands.format]
 glob = "*.{swift}"
 run = "swift format --in-place {staged_files}"
 stage_fixed = true
