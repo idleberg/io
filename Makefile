@@ -7,6 +7,7 @@ install:
 build:
 	xcodebuild -scheme io \
 		-configuration Release \
+		-derivedDataPath build
 
 lint:
 	swiftlint lint \
