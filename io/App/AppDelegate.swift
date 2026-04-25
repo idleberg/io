@@ -199,7 +199,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 		guard let button = statusItem.button else { return }
 		displayName.roll()
 		popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
-		popover.contentViewController?.view.window?.makeKey()
+		let window = popover.contentViewController?.view.window
+		window?.makeKey()
+		window?.makeFirstResponder(nil)
 		installEventMonitor()
 	}
 
