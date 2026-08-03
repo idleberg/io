@@ -91,7 +91,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 		if let button = statusItem.button {
 			button.target = self
 			button.action = #selector(statusItemClicked(_:))
-			button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+			// Fire on mouse-down so the popover appears the instant the button is
+			// pressed, the way system menus do, rather than waiting for release.
+			button.sendAction(on: [.leftMouseDown, .rightMouseDown])
 		}
 	}
 
@@ -105,7 +107,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 
 	@objc private func statusItemClicked(_ sender: NSStatusBarButton) {
 		guard let event = NSApp.currentEvent else { return }
-		if event.type == .rightMouseUp {
+		let isSecondaryClick =
+			event.type == .rightMouseDown
+			|| (event.type == .leftMouseDown && event.modifierFlags.contains(.control))
+
+		if isSecondaryClick {
 			showContextMenu()
 		} else {
 			togglePopover()
@@ -173,7 +179,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
 		popover = NSPopover()
 		popover.behavior = .transient
 		popover.animates = false
-		popover.contentViewController = NSHostingController(rootView: rootView())
+
+		let hostingController = NSHostingController(rootView: rootView())
+		popover.contentViewController = hostingController
+
+		// NSHostingController builds its view lazily, so the first click would
+		// otherwise pay for constructing and sizing the whole SwiftUI hierarchy.
+		// Do that work now, at launch, while nobody is waiting on it.
+		let view = hostingController.view
+		view.layoutSubtreeIfNeeded()
+		popover.contentSize = view.fittingSize
 	}
 
 	@ViewBuilder
