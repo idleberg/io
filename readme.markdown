@@ -2,6 +2,10 @@
 
 A macOS menu bar utility that routes audio from a selected input device to a selected output device — inspired by the discontinued [LineIn](https://rogueamoeba.com/freebies/) by Rogue Amoeba.
 
+<div align="center">
+	<img width="480" src="resources/screenshot.png" alt="Screenshot of the io menu dialog.">
+</div>
+
 ## Features
 
 - Select any audio input and output device
